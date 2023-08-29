@@ -32,8 +32,8 @@ const Footer = () => {
                     </p>
                 </div>
                 <div className='flex flex-wrap gap-12'>
-                    {footerLinks.map((footerLink) => (
-                        <FooterColumn title={footerLink.title} links={footerLink.links} />
+                    {footerLinks.map((footerLink, i) => (
+                        <FooterColumn key={i} title={footerLink.title} links={footerLink.links} />
                     ))}
                 </div>
             </div>
