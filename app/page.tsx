@@ -5,7 +5,7 @@ import { ProjectSearch, ProjectInterface, HomeProps } from '@/types';
 import { Categories, LoadMore, ProjectCard } from '@/components';
 
 export const dynamic = 'force-dynamic';
-export const dynamicParams = 'true';
+export const dynamicParams = true;
 export const revalidate = 0;
 
 const Home = async({ searchParams: { category, endCursor } }: HomeProps) => {
