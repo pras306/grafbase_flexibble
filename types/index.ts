@@ -11,8 +11,8 @@ export type FormState = {
 };
 
 export interface SearchParams {
-  category?: string;
-  endCursor?: string;
+  category: string;
+  endCursor: string;
 };
 
 export interface HomeProps {
