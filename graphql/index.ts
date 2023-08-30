@@ -84,6 +84,96 @@ export const projectsQuery = `
   }
 `;
 
+export const projectsCategoryQuery = `
+  query getProjects($category: String) {
+    projectSearch(first: 8, filter: {category: {eq: $category}}) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          title
+          githubUrl
+          description
+          liveSiteUrl
+          id
+          image
+          category
+          createdBy {
+            id
+            email
+            name
+            avatarUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const projectsCursorQuery = `
+  query getProjects($endCursor: String) {
+    projectSearch(first: 8, after: $endCursor) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          title
+          githubUrl
+          description
+          liveSiteUrl
+          id
+          image
+          category
+          createdBy {
+            id
+            email
+            name
+            avatarUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const projectsBaseQuery = `
+  query getProjects {
+    projectSearch(first: 8) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          title
+          githubUrl
+          description
+          liveSiteUrl
+          id
+          image
+          category
+          createdBy {
+            id
+            email
+            name
+            avatarUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getProjectByIdQuery = `
   query GetProjectById($id: ID!) {
     project(by: { id: $id }) {

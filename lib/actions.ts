@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 
-import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from '@/graphql';
+import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsBaseQuery, projectsCategoryQuery, projectsCursorQuery, projectsQuery, updateProjectMutation } from '@/graphql';
 import { ProjectForm } from '@/types';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -90,8 +90,9 @@ export const fetchAllProjects = async(category: string, endCursor: string) => {
     client.setHeader('x-api-key', apiKey);
 
     if(category.length > 0 && endCursor.length > 0) return makeGraphQLRequest(projectsQuery, { category, endCursor });
-    if(category.length <= 0 && endCursor.length > 0) return makeGraphQLRequest(projectsQuery, { category: "", endCursor });
-    if(category.length <= 0 && endCursor.length <= 0) return makeGraphQLRequest(projectsQuery, { category: "" });
+    else if(category.length <= 0 && endCursor.length > 0) return makeGraphQLRequest(projectsCursorQuery, { endCursor });
+    else if(category.length > 0 && endCursor.length <= 0) return makeGraphQLRequest(projectsCategoryQuery, { category });
+    else return makeGraphQLRequest(projectsBaseQuery, { category });
 };
 
 export const getProjectDetails = (id: string) => {
